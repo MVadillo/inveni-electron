@@ -1,0 +1,109 @@
+:root {
+    --border_radius: 25px;
+    --font_size: 20px;
+}
+
+.traslate {
+    transform: translateY(-50px);
+}
+
+#wrapper {
+    height: 100vh;
+}
+
+.sectionCard4{
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+}
+
+.background-dark {
+    background-color: #454D55;
+}
+
+.border_radius {
+    border-radius: var(--border_radius);
+}
+
+.text_color_white {
+    color: #fff;
+}
+
+.size_font {
+    font-size: var(--font_size);
+}
+
+p {
+    font-size: 1.4em;
+}
+
+.footer {
+    /*position: fixed;*/
+    bottom: 0;
+
+    /* And if you want the div to be full-width: */
+    left: 0;
+    right: 0;
+}
+
+.color_battery_full{
+    color: darkgreen;
+}
+.color_battery_three_quarters{
+    color:  darkolivegreen;
+}
+.color_battery_half{
+    color: darkorange;
+}
+.color_battery_quarter{
+    color: darkgoldenrod;
+}
+.color_battery_empty{
+    color: darkred;
+}
+
+.green {
+    background-color: #45B24C;
+    color: #ffffff;
+    border-radius: 0 0 var(--border_radius) var(--border_radius);
+}
+
+.red {
+    background-color: #FD2412;
+    color: #ffffff;
+    border-radius: 0 0 var(--border_radius) var(--border_radius);
+}
+
+.grey {
+    background-color: #65727C;
+    color: #ffffff;
+    border-radius: 0 0 var(--border_radius) var(--border_radius);
+}
+
+.purple {
+    background-color: #811EC6;
+    color: #ffffff;
+    border-radius: 0 0 var(--border_radius) var(--border_radius);
+}
+
+.pagination {
+    margin-bottom: 0px;
+}
+
+/*
+* Media queries para cuando tenemos diferentes monitores
+* se ponen aqui para usarse cuando sea necesario.
+*/
+@media (max-width: 599px) {
+
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+
+}
+
+@media (max-width: 991px) {
+    #wrapper {
+        height: 100%;
+    }
+}

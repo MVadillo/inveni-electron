@@ -89,4 +89,4 @@ typings/
 out/
 
 # electron package
-dist/
+# dist/

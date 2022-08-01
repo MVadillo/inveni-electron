@@ -93,7 +93,7 @@ const createDashboardWindow = () => {
   });
 
   dashboardWindow.loadFile(path.join(__dirname, 'dashboard/dashboard.ejs'));
-  // dashboardWindow.webContents.openDevTools();
+   dashboardWindow.webContents.openDevTools();
   dashboardWindow.maximize();
 }
 
