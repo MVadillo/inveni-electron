@@ -15,7 +15,7 @@ const Toast = Swal.mixin({
 
 const getLogin = async(_usuario, _password) => { 
   //return await fetch('http://localhost:3000/api/remote/autenticacion',{
-  return await fetch('http://157.245.245.81:3000/api/remote/autenticacion',{
+  return await fetch('https://invenimx.com/api/remote/autenticacion',{
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

@@ -284,7 +284,7 @@
         $.ajax({
           cache: false,
           //url: 'http://localhost:3000/api/remote/getOneFromRemote/' + tableName,
-          url: 'http://157.245.245.81:3000/api/remote/getOneFromRemote/' + tableName,
+          url: 'https://invenimx.com/api/remote/getOneFromRemote/' + tableName,
           type: 'GET',
           success: function (data) {
             if (data.payload === "No se encontraron tablas en la base de datos") {
@@ -335,7 +335,7 @@
                 ajax: {
                   type: "POST",
                   // url: "http://localhost:3000/api/remote/getUserAllowedTableServerSideQuery",
-                  url: "http://157.245.245.81:3000/api/remote/getUserAllowedTableServerSideQuery",
+                  url: "https://invenimx.com/api/remote/getUserAllowedTableServerSideQuery",
                   data: function (d) {
                     d.table = tableName;
                     d.macAddress = STORE.MACADDRESS;
@@ -420,7 +420,7 @@
         $.ajax({
           cache: false,
           //url: 'http://localhost:3000/api/remote/getOneFromRemote/todasGeneral',
-          url: 'http://157.245.245.81:3000/api/remote/getOneFromRemote/' + tableName,
+          url: 'https://invenimx.com/api/remote/getOneFromRemote/' + tableName,
           type: 'GET',
           success: function (data) {
             if (data.payload === "No se encontraron tablas en la base de datos") {
@@ -487,7 +487,7 @@
                 ajax: {
                   type: "POST",
                   //url: "http://localhost:3000/api/remote/getUserAllowedTableServerSideQuery",
-                  url: "http://157.245.245.81:3000/api/remote/getUserAllowedTableServerSideQuery",
+                  url: "https://invenimx.com/api/remote/getUserAllowedTableServerSideQuery",
                   data: function (d) {
                     // d.table = tableName;
                     d.table = tableName;
@@ -580,7 +580,7 @@
 
       APP.LOAD.GET_USER_ALLOWED_TABLES = APP.LOAD.GET_USER_ALLOWED_TABLES || async function () {
         //return await fetch('http://localhost:3000/api/remote/getUserAllowedTables', {
-        return await fetch('http://157.245.245.81:3000/api/remote/getUserAllowedTables', {
+        return await fetch('https://invenimx.com/api/remote/getUserAllowedTables', {
           method: 'POST', mode: 'cors', cache: 'no-cache', credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
           redirect: 'follow', referrerPolicy: 'no-referrer',
@@ -612,7 +612,15 @@
 
             var tables = response.payload;
             let mercaTab = document.getElementById("mercaTab");
-
+            
+            if (tables === undefined) {
+              Toast.fire({
+                icon: 'error',
+                title: 'Sin tablas asignadas.'
+              })
+              return;
+            }
+            
             if (tables.length > 0) {
 
               console.log(tables);
@@ -810,7 +818,7 @@
         console.log(dataArray)
         $.ajax({
           cache: false,
-          url: 'http://157.245.245.81:3000/api/remote/persmisosDeImpresion/',
+          url: 'https://invenimx.com/api/remote/persmisosDeImpresion/',
           type: 'POST',
           data: {
             usuario: STORE.USUARIO,
