@@ -89,4 +89,9 @@ typings/
 out/
 
 # electron package
-# dist/
+dist/
+
+# ejecutables
+ejecutables/
+# NOTA para generarlos con yarn dist
+# Distribución --arch=ia32 to --arch=x64 en package.json

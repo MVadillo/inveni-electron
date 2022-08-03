@@ -334,7 +334,7 @@
                 serverSide: true,
                 ajax: {
                   type: "POST",
-                  // url: "http://localhost:3000/api/remote/getUserAllowedTableServerSideQuery",
+                  //url: "http://localhost:3000/api/remote/getUserAllowedTableServerSideQuery",
                   url: "https://invenimx.com/api/remote/getUserAllowedTableServerSideQuery",
                   data: function (d) {
                     d.table = tableName;
@@ -818,6 +818,7 @@
         console.log(dataArray)
         $.ajax({
           cache: false,
+          //url: 'http://localhost:3000/api/remote/persmisosDeImpresion/',
           url: 'https://invenimx.com/api/remote/persmisosDeImpresion/',
           type: 'POST',
           data: {
