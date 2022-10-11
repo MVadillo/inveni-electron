@@ -862,19 +862,15 @@
               }
 
               titulos = Object.keys(fila); // titulos ya purgados 
-
               row = Object.values(fila);
-              tbody.push([row.join(',')]);
+              tbody.push(row);
               row = [];
             }
 
             console.log(tbody)
 
             // Armar el array de encabezado
-            reportHeader =
-              [
-                [titulos = titulos.join(',')]
-              ];
+            reportHeader = [titulos];
 
             XLSX = require('xlsx')
 
