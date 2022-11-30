@@ -1,7 +1,7 @@
 {
   "name": "inveni-desktop",
   "productName": "inveni-desktop",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "inveni-desktop",
   "main": "src/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
         {
           "target": "portable",
           "arch": [
-            "x64"  
+            "ia32"  
           ]
         }
       ]

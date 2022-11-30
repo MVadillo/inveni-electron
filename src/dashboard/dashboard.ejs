@@ -281,6 +281,22 @@
       APP.LOAD = APP.LOAD || {};
 
       APP.LOAD.LOAD_TABLE_DETAIL = APP.LOAD.LOAD_TABLE_DETAIL || function (tableName) {
+        //Funcionalidades para el rango personalizado por usuario
+        var rangosString = "5, 10, 20";
+        $.ajax({
+              //url: 'http://localhost:3000/api/tables/getUserRangeParams/' + tableName + '/' + STORE.USUARIO,
+              url: 'https://invenimx.com/api/tables/getUserRangeParams/' + tableName + '/' + STORE.USUARIO,
+              type: 'GET', 
+              
+              success: function(data){
+                console.log('Resultado: ');
+                console.log(data);
+                if(data?.[0]?.rango  !== undefined){
+                  rangosString = data[0].rango;
+                }
+              }
+            });
+        
         $.ajax({
           cache: false,
           //url: 'http://localhost:3000/api/remote/getOneFromRemote/' + tableName,
@@ -308,6 +324,7 @@
 
             var titles = data.payload.titles;
             var columnNames = []
+            var rangos = rangosString.split(',')
 
             for (let i = 0; i < titles.length; i++) {
               const element = titles[i].Field;
@@ -332,6 +349,18 @@
                 columns: columnNames,
                 processing: true,
                 serverSide: true,
+                dom: 'Bfrtip',
+                buttons: [
+                  'pageLength',
+                  {
+                    text: 'Exportar a Excel',
+                    action: function (e, dt, node, config) {
+                      let datatableJson = datatable.ajax.json()
+                      console.log(datatableJson)
+                      LOAD.GENERER_EXCEL(datatableJson.data,'consulta')
+                    }
+                  }
+                ],
                 ajax: {
                   type: "POST",
                   //url: "http://localhost:3000/api/remote/getUserAllowedTableServerSideQuery",
@@ -384,7 +413,7 @@
                   $("#tables_datatable_filter").hide();
                 },
                 pageLength: 5,
-                lengthMenu: [[5, 10, 20], [5, 10, 20]],
+                lengthMenu: [rangos, rangos],
                 pagingType: "full_numbers",
                 language: {
                   "sProcessing": "Procesando...",
@@ -417,9 +446,25 @@
       };
 
       APP.LOAD.LOAD_TABLE_DETAIL_MERCADOTECNIA = APP.LOAD.LOAD_TABLE_DETAIL_MERCADOTECNIA || function (tableName) {
+        //Funcionalidades para el rango personalizado por usuario
+        var rangosString = "5, 10, 20";
+        $.ajax({
+              //url: 'http://localhost:3000/api/tables/getUserRangeParams/' + tableName + '/' + STORE.USUARIO,
+              url: 'https://invenimx.com/api/tables/getUserRangeParams/' + tableName + '/' + STORE.USUARIO,
+              type: 'GET', 
+              
+              success: function(data){
+                console.log('Resultado: ');
+                console.log(data);
+                if(data?.[0]?.rango  !== undefined){
+                  rangosString = data[0].rango;
+                }
+              }
+            });
+
         $.ajax({
           cache: false,
-          //url: 'http://localhost:3000/api/remote/getOneFromRemote/todasGeneral',
+          //url: 'http://localhost:3000/api/remote/getOneFromRemote/' + tableName,
           url: 'https://invenimx.com/api/remote/getOneFromRemote/' + tableName,
           type: 'GET',
           success: function (data) {
@@ -444,6 +489,7 @@
 
             var titles = data.payload.titles;
             var columnNames = []
+            var rangos = rangosString.split(',')
 
             for (let i = 0; i < titles.length; i++) {
               const element = titles[i].Field;
@@ -480,7 +526,7 @@
                     action: function (e, dt, node, config) {
                       let datatableJson = datatable.ajax.json()
                       console.log(datatableJson)
-                      LOAD.GENERER_EXCEL(datatableJson.data)
+                      LOAD.GENERER_EXCEL(datatableJson.data,'mercadotecnia')
                     }
                   }
                 ],
@@ -536,7 +582,7 @@
                   $("#tables_datatable_mercadotecnia_filter").hide();
                 },
                 pageLength: 5,
-                lengthMenu: [[5, 10, 20], [5, 10, 20]],
+                lengthMenu: [rangos, rangos],
                 pagingType: "full_numbers",
                 language: {
                   "sProcessing": "Procesando...",
@@ -814,8 +860,15 @@
         });
       };
 
-      APP.LOAD.GENERER_EXCEL = APP.LOAD.GENERER_EXCEL || function (dataArray) {
-        console.log(dataArray)
+      APP.LOAD.GENERER_EXCEL = APP.LOAD.GENERER_EXCEL || function (dataArray,tipo) {
+        var nombreTabla = '';
+        if(tipo==='mercadotecnia')
+        {
+          nombreTabla = $('#combobox_tablas_mercadotecnia').val();  
+        }
+        else{
+          nombreTabla = $('#combobox_tablas').val();
+        }
         $.ajax({
           cache: false,
           //url: 'http://localhost:3000/api/remote/persmisosDeImpresion/',
@@ -823,12 +876,11 @@
           type: 'POST',
           data: {
             usuario: STORE.USUARIO,
-            tabla: $('#combobox_tablas_mercadotecnia').val(),
+            tabla: nombreTabla,
             macAddress: STORE.MACADDRESS
           },
           success: function (data) {
 
-            console.log(data);
             let columnas = data[0].columnas
             let limite_consultas = data[0].limite_consultas
             let no_consultas = data[0].no_consultas
@@ -850,7 +902,6 @@
 
             for (let i = 0; i < dataArray.length; i++) {
               let fila = dataArray[i];
-              console.log(fila)
 
               titulos = Object.keys(fila); // todos los titulos
 
@@ -867,7 +918,7 @@
               row = [];
             }
 
-            console.log(tbody)
+            //console.log(tbody)
 
             // Armar el array de encabezado
             reportHeader = [titulos];
